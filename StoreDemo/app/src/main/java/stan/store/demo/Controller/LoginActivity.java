@@ -54,7 +54,8 @@ public class LoginActivity extends AppCompatActivity {
                 //Step2 驗證資料正確性
                 String Check_SQL = "SELECT * FROM user WHERE id = " + account + " AND password = " + password;
                 if (mDBHelper.QuerySQL(Check_SQL).size() > 0) {
-                    Toast.makeText(LoginActivity.this,"登入成功", Toast.LENGTH_SHORT).show();
+                    mUser = new User(mDBHelper.QuerySQL(Check_SQL).get(0));
+                    Toast.makeText(LoginActivity.this,mUser.getName() + " 您好，登入成功", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(LoginActivity.this,"帳號密碼有誤", Toast.LENGTH_SHORT).show();
                 }

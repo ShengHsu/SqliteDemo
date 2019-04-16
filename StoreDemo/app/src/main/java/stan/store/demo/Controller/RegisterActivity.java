@@ -24,9 +24,6 @@ public class RegisterActivity extends AppCompatActivity {
     //DB
     private SQLiteHelper mDBHelper;
 
-    //Model
-    private User mUser;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +43,6 @@ public class RegisterActivity extends AppCompatActivity {
             for (String key : mapData.keySet()) {
                 Log.e(TAG, "onCreate: " + key + "->" + mapData.get(key));
             }
-            mUser = new User(mapData);
         }
 
 
