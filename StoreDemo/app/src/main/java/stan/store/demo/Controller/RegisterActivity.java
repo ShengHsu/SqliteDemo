@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.HashMap;
 
@@ -21,7 +22,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button mButton_Register;
 
     //DB
-    private SQLiteHelper mDBHelper ;
+    private SQLiteHelper mDBHelper;
 
     //Model
     private User mUser;
@@ -33,22 +34,20 @@ public class RegisterActivity extends AppCompatActivity {
         mDBHelper = new SQLiteHelper(RegisterActivity.this);
 
         // getAll Method
-//        for (HashMap<String,String> mapData : mDBHelper.getAll("user")) {
-//            for (String key : mapData.keySet()) {
-//                Log.e(TAG, "onCreate: " + key + "->" + mapData.get(key));
-//            }
-//        }
+        for (HashMap<String,String> mapData : mDBHelper.getAll("user")) {
+            for (String key : mapData.keySet()) {
+                Log.e(TAG, "onCreate: " + key + "->" + mapData.get(key));
+            }
+        }
 
         // QuerySQL Method
         String SQL = "SELECT * FROM user WHERE id = 2";
         for (HashMap<String,String> mapData : mDBHelper.QuerySQL(SQL)) {
             for (String key : mapData.keySet()) {
-//                Log.e(TAG, "onCreate: " + key + "->" + mapData.get(key));
+                Log.e(TAG, "onCreate: " + key + "->" + mapData.get(key));
             }
             mUser = new User(mapData);
         }
-
-        Log.e(TAG, "User: " + mUser.getPhone());
 
 
         //Step1 賦予元件id
@@ -68,9 +67,10 @@ public class RegisterActivity extends AppCompatActivity {
                 tmpMap.put("name",name);
                 tmpMap.put("phone",phone);
                 tmpMap.put("password",password);
-                mDBHelper.addData("user", tmpMap);
-
-                Log.e(TAG, "Register Success");
+                if (mDBHelper.addData("user", tmpMap)) {
+                    Toast.makeText(RegisterActivity.this, "註冊成功", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
             }
         });
 

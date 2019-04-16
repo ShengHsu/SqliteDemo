@@ -87,25 +87,28 @@ public class SQLiteHelper {
         return mArrayData;
     }
 
-    public void addData (String TableName, HashMap<String,String> DataMap) {
+    public boolean addData (String TableName, HashMap<String,String> DataMap) {
         ContentValues ContentVal = new ContentValues(DataMap.size());
         for (String key : DataMap.keySet()) {
             ContentVal.put(key, DataMap.get(key));
         }
         db.insert(TableName, null, ContentVal);
+        return true;
     }
 
-    public void update (String TableName, HashMap<String,String> DataMap, String WhereID) {
+    public boolean update (String TableName, HashMap<String,String> DataMap, String WhereID) {
         ContentValues ContentVal = new ContentValues();
         for (String key : DataMap.keySet()) {
             ContentVal.put(key, DataMap.get(key));
         }
 
         db.update(TableName, ContentVal, "_ID = " + WhereID, null);
+        return true;
     }
 
-    public void delete (String TableName, String WhereID) {
+    public boolean delete (String TableName, String WhereID) {
         db.delete(TableName, "_ID = " + WhereID, null);
+        return true;
     }
 
 
