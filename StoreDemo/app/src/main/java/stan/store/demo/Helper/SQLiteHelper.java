@@ -27,9 +27,17 @@ public class SQLiteHelper {
                 "name VARCHAR(50), " +    //姓名欄位
                 "phone VARCHAR(50), " +    //電話欄位
                 "password VARCHAR(50))";    //密碼欄位
-
-
         db.execSQL(SQL_UserTable);    // 建立資料表
+
+
+        //Create Product's Table
+        String SQL_Product_Table =
+                "CREATE TABLE IF NOT EXISTS " +
+                        "product" +            // 資料表名稱
+                        "(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +    //主鍵(唯一識別)
+                        "name VARCHAR(50), " +    //產品名稱
+                        "price VARCHAR(50))";    //產品價格
+        db.execSQL(SQL_Product_Table);    // 建立資料表
 
     }
 
